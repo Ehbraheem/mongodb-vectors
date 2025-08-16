@@ -1,8 +1,8 @@
 import { MongoClient, ServerApiVersion } from 'mongodb';
-require("@tensorflow/tfjs-node");
+import("@tensorflow/tfjs-node");
 import us_encoder from "@tensorflow-models/universal-sentence-encoder";
 
-const { MONGO_HOST, MONGO_PORT, MONGO_USER, MONGO_PASS, MONGO_DB, MONGO_COLLECTION } = process.env;
+const { MONGO_HOST, MONGO_USER, MONGO_PASS, MONGO_DB } = process.env;
 
 const uri = `mongodb+srv://${MONGO_USER}:${MONGO_PASS}@${MONGO_HOST}/?retryWrites=true&w=majority`;
 
@@ -15,14 +15,14 @@ async function loadModel() {
   }
 }
 
-async function vectorizeText(text) {
+export async function vectorizeText(text) {
   await loadModel();
   const embeddingsRequest = await model.embed(text);
   const vector = embeddingsRequest.arraySync()[0];
   return vector;
 }
 
-async function connectToMongoDB() {
+export async function connectToMongoDB() {
   if (!client) {
     client = new MongoClient(uri);
     try {
@@ -36,12 +36,10 @@ async function connectToMongoDB() {
   return client.db(MONGO_DB);
 }
 
-async function closeMongoDBConnection() {
+export async function closeMongoDBConnection() {
   if (client) {
     await client.close();
     console.log('MongoDB connection closed');
     client = null;
   }
 }
-
-module.exports = { vectorizeText, connectToMongoDB, closeMongoDBConnection, MONGO_COLLECTION };
