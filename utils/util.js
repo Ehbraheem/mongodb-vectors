@@ -1,4 +1,3 @@
-require('dotenv').config();
 import { MongoClient, ServerApiVersion } from 'mongodb';
 require("@tensorflow/tfjs-node");
 import us_encoder from "@tensorflow-models/universal-sentence-encoder";

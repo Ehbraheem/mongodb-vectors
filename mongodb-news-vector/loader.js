@@ -1,5 +1,6 @@
+require('dotenv').config();
 import newsArray from './data/newsData.json' assert { type: "json" };
-import { vectorizeText, connectToMongoDB, closeMongoDBConnection, MONGO_COLLECTION } from './util.js';
+import { vectorizeText, connectToMongoDB, closeMongoDBConnection, MONGO_COLLECTION } from '../utils/util.js';
 
 
 async function loadVectorizedData() {
