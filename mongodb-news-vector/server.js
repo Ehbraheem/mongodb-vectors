@@ -1,5 +1,8 @@
+import '../utils/env.js';
 import express from 'express';
-import { vectorizeText, connectToMongoDB, closeMongoDBConnection, MONGO_COLLECTION } from '../utils/util.js';
+import { vectorizeText, connectToMongoDB, closeMongoDBConnection } from '../utils/util.js';
+
+const { MONGO_COLLECTION } = process.env;
 
 const app = express();
 app.use(express.json());
