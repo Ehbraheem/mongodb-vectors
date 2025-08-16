@@ -1,5 +1,5 @@
 import express from 'express';
-import { vectorizeText, connectToMongoDB, closeMongoDBConnection, MONGO_COLLECTION } from './util.js';
+import { vectorizeText, connectToMongoDB, closeMongoDBConnection, MONGO_COLLECTION } from '../utils/util.js';
 
 const app = express();
 app.use(express.json());
